@@ -3,7 +3,7 @@ class Products {
     protected string $url_img;
     protected string $title;
     protected float $price;
-    protected string $prod_type;
+    private string $prod_type;
 
     public function __construct(string $_url_img, string $_title, float $_price, string $_prod_type, ){
         $this->url_img = $_url_img;
