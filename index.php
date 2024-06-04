@@ -5,17 +5,24 @@ require_once __DIR__ . '/Models/products.php';
 $products = [];
 
 if (!empty($_POST)) {
-    $url_image = $_POST["url_image"];
-    $prod_title = $_POST["prod_title"];
-    $prod_price = $_POST["prod_price"];
-    $prod_typology = $_POST["prod_typology"];
-    $prod_animal = $_POST["prod_animal"];
+    try {
+        $url_image = $_POST["url_image"];
+        $prod_title = $_POST["prod_title"];
+        $prod_price = floatval($_POST["prod_price"]);
+        $prod_typology = $_POST["prod_typology"];
+        $prod_animal = $_POST["prod_animal"];
 
-    // Create new product object (optional: add validation here)
-    $new_product = new Categories($url_image, $prod_title, $prod_price, $prod_typology, $prod_animal);
+        if ($prod_price < 0) {
+            throw new Exception("Mi dispiace, ma il prezzo non può avere valore negativo!");
+        }
 
-    // Add product to array
-    array_push($products, $new_product);
+        $new_product = new Categories($url_image, $prod_title, $prod_price, $prod_typology, $prod_animal);
+
+        // Add product to array
+        array_push($products, $new_product);
+    } catch (Exception $e) {
+        echo "Errore: " . $e->getMessage();
+    }
 }
 
 // $url_image = $_POST["url_image"];

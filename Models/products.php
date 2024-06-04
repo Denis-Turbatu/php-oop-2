@@ -77,7 +77,6 @@ class Products {
     public function setPrice($price)
     {
         $this->price = $price;
-
         return $this;
     }
 
