@@ -10,15 +10,15 @@ if (!empty($_POST)) {
         $prod_title = $_POST["prod_title"];
         $prod_price = floatval($_POST["prod_price"]);
         $prod_typology = $_POST["prod_typology"];
+        $prod_weight = $_POST["prod_weight"];
         $prod_animal = $_POST["prod_animal"];
 
         if ($prod_price < 0) {
             throw new Exception("Mi dispiace, ma il prezzo non può avere valore negativo!");
         }
 
-        $new_product = new Categories($url_image, $prod_title, $prod_price, $prod_typology, $prod_animal);
+        $new_product = new Categories($url_image, $prod_title, $prod_price, $prod_typology, $prod_weight, $prod_animal);
 
-        // Add product to array
         array_push($products, $new_product);
     } catch (Exception $e) {
         echo "Errore: " . $e->getMessage();
@@ -65,10 +65,15 @@ if (!empty($_POST)) {
         </select>
         <br>
 
+        <label for="prod_weight">Peso Articolo:</label>
+        <input type="text" id="prod_weight" name="prod_weight" required>
+        <br>
+
         <label for="prod_animal">Animale:</label>
         <select id="prod_animal" name="prod_animal" required>
             <option value="dog">Cane</option>
             <option value="cat">Gatto</option>
+            <option value="bho">bho</option>
         </select>
         <br>
 
@@ -80,12 +85,13 @@ if (!empty($_POST)) {
 
     if (!empty($products)) { ?>
         <h2>Prodotti inseriti:</h2>
-        <?php foreach ($products as $prod){?>
+        <?php foreach ($products as $prod) { ?>
             <ul>
                 <li>Immagine: <?= $prod->getUrl_img() ?></li>
                 <li>Nome: <?= $prod->getTitle() ?></li>
                 <li>Prezzo: <?= $prod->getPrice() ?></li>
                 <li>Tipologia: <?= $prod->getProd_type() ?></li>
+                <li>Peso Articolo: <?= $prod->getWeight() ?></li>
                 <li>Animale: <?= $prod->getAnimal() ?></li>
             </ul>
         <?php } ?>

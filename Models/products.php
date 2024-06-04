@@ -1,17 +1,10 @@
 <?php 
 class Products {
+
     protected string $url_img;
     protected string $title;
     protected float $price;
     private string $prod_type;
-
-    // public function __construct(string $_url_img, string $_title, float $_price, string $_prod_type, ){
-    //     $this->url_img = $_url_img;
-    //     $this->title = $_title;
-    //     $this->price = $_price;
-    //     $this->prod_type = $_prod_type;
-    // }
-    
 
     /**
      * Get the value of url_img
